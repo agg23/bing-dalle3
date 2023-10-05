@@ -17,9 +17,10 @@
     "strictNullChecks": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
   },
   "include": [
-    "./src/**/*.ts"
+    "./src/**/*.ts",
+    "./src/types/module.d.ts"
   ]
 }
