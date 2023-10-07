@@ -18,7 +18,10 @@ export const Header: React.FC<{}> = () => {
 
   return (
     <div className={classes.header}>
-      <div ref={ref} className={classes.existingHeaderWrapper}></div>
+      <div
+        ref={ref}
+        className={`gihead ${classes.existingHeaderWrapper}`}
+      ></div>
       <CloseButton />
     </div>
   );

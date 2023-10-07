@@ -7,5 +7,7 @@
 .mainScroll {
   height: 100%;
 
-  overflow-y: auto;
+  /* This is technically wrong, but every use except the first one will have images that cause it to scroll, */
+  /* so this just fixes the right side bouncing issue in advance */
+  overflow-y: scroll;
 }

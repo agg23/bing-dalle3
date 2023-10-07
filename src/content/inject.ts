@@ -5,8 +5,8 @@ const INJECTED_BASE_CLASS = "bing-dalle3-injected";
 const REACT_ROOT_ID = "bing-dalle3-react-root";
 
 const killElements = () => {
-  // Restore body's overflow
-  document.body.style.overflow = "";
+  // Restore root's overflow
+  document.documentElement.style.overflow = "";
 };
 
 const clearOldElements = () => {
@@ -56,9 +56,8 @@ const openSeeAll = () => {
   //   console.error("No registered React instance...");
   //   return;
   // }
-  // Disable body overflow
-  document.body.style.overflow = "hidden";
-  document.body.style.scrollbarGutter = "stable";
+  // Disable root overflow
+  document.documentElement.style.overflow = "hidden";
 
   const reactRoot = document.createElement("div");
   reactRoot.id = REACT_ROOT_ID;
