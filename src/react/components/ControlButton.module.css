@@ -1,0 +1,47 @@
+.action {
+  height: 36px;
+  padding: 6px;
+  border-radius: 32px;
+  font-size: 14px;
+  line-height: 22px;
+  color: #fff;
+  box-sizing: border-box;
+
+  outline: 2px solid #fff;
+
+  cursor: pointer;
+  user-select: none;
+}
+
+.action:hover {
+  opacity: 0.8;
+}
+
+.action:active {
+  opacity: 0.6;
+}
+
+.action .icon:before {
+  background-size: 15px;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  vertical-align: top;
+  margin: 4px 7px 0 6px;
+}
+
+.download .icon:before {
+  /* This might disappear, but we should gracefully degrade */
+  content: url(https://bing.com/rp/NksoREl6kyiIiG-LjeZEGnTleEQ.svg);
+}
+
+.copy .icon:before {
+  margin-top: 2px;
+
+  content: url(https://bing.com/rp/CCCDChKKiMX9EWH4dT71bEK7ybE.svg);
+}
+
+.text {
+  margin-right: 8px;
+}

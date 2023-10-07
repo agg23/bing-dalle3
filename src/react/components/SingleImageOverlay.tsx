@@ -5,6 +5,7 @@ import { buildExportFilename, formatDatetimeNice } from "../../util/string";
 import { downloadUri } from "../../util/util";
 
 import classes from "./SingleImageOverlay.module.css";
+import { ControlButton } from "./ControlButton";
 
 interface SingleImageOverlayProps {
   image: PromptImageWithUrl | undefined;
@@ -43,10 +44,9 @@ export const SingleImageOverlay: React.FC<SingleImageOverlayProps> = ({
                   <span className={classes.text}>Copy</span>
                 </span>
               </div> */}
-              <div
-                className={`${classes.action} ${classes.download}`}
-                aria-label="Download"
-                role="button"
+              <ControlButton
+                type="download"
+                text="Download"
                 onClick={() =>
                   downloadUri(
                     image.url,
@@ -56,12 +56,7 @@ export const SingleImageOverlay: React.FC<SingleImageOverlayProps> = ({
                     )
                   )
                 }
-              >
-                <span>
-                  <span className={classes.icon}></span>
-                  <span className={classes.text}>Download</span>
-                </span>
-              </div>
+              />
             </div>
           </div>
         </div>

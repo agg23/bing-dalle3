@@ -3,6 +3,8 @@
   grid-template-columns: 1fr 400px;
 
   padding: 16px;
+
+  --image-gap: 16px;
 }
 
 .imageGrid {
@@ -13,7 +15,7 @@
   grid-auto-columns: minmax(0, 1fr);
   grid-auto-flow: row;
 
-  row-gap: 8px;
+  row-gap: var(--image-gap);
 
   /* Locks grid to be square, to prevent extra large images */
   aspect-ratio: 1 / 1;
@@ -28,7 +30,7 @@
 
 .row {
   display: flex;
-  column-gap: 8px;
+  column-gap: var(--image-gap);
 
   /* Center images in row when there's only one */
   justify-content: center;
@@ -63,4 +65,21 @@
 
 .controls {
   padding-left: 16px;
+}
+
+.prompt {
+  white-space: normal;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+
+  column-gap: 16px;
+
+  padding: 12px 0 16px 0;
 }

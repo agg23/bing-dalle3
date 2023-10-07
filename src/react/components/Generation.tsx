@@ -1,10 +1,12 @@
 import React, { useMemo } from "react";
 import { ImageDBEntry, PromptDBEntry } from "../../content/db";
 import { useGenerationImages } from "../hooks/useGenerationImages";
-import { formatDatetimeNice } from "../../util/string";
+import { buildExportFilename, formatDatetimeNice } from "../../util/string";
 
 import classes from "./Generation.module.css";
 import { PromptImageWithUrl } from "../types";
+import { ControlButton } from "./ControlButton";
+import { downloadUri } from "../../util/util";
 
 interface GenerationProps {
   prompt: PromptDBEntry;
@@ -70,8 +72,22 @@ export const Generation: React.FC<GenerationProps> = ({
         )}
       </div>
       <div className={classes.controls}>
-        <div>{prompt.prompt}</div>
+        <div className={classes.prompt}>{prompt.prompt}</div>
         <div>{formatDatetimeNice(new Date(prompt.recordTimestamp))}</div>
+        <div className={classes.buttons}>
+          <ControlButton
+            type="download"
+            text="Download All"
+            onClick={() => {
+              for (const image of imagesWithUrls) {
+                downloadUri(
+                  image.url,
+                  buildExportFilename(prompt.prompt, prompt.recordTimestamp)
+                );
+              }
+            }}
+          />
+        </div>
       </div>
     </div>
   );
