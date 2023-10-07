@@ -3,7 +3,11 @@ import { CloseButton } from "./CloseButton";
 
 import classes from "./Header.module.css";
 
-export const Header: React.FC<{}> = () => {
+interface HeaderProps {
+  onClose: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onClose }) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
@@ -22,7 +26,7 @@ export const Header: React.FC<{}> = () => {
         ref={ref}
         className={`gihead ${classes.existingHeaderWrapper}`}
       ></div>
-      <CloseButton />
+      <CloseButton onClose={onClose} />
     </div>
   );
 };

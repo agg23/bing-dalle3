@@ -29,5 +29,11 @@ export const formatDateToParts = (date: Date) => {
 export const formatDatetimeNice = (date: Date): string => {
   const { hourString, dateString } = formatDateToParts(date);
 
-  return `${hourString} on ${dateString}`;
+  return `${dateString} at ${hourString}`;
+};
+
+export const buildExportFilename = (prompt: string, timestamp: number) => {
+  const { hourString, dateString } = formatDateToParts(new Date(timestamp));
+
+  return `${prompt} - ${dateString} ${hourString}.png`;
 };

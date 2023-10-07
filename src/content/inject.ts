@@ -69,7 +69,7 @@ const openSeeAll = () => {
   reactRoot.style.left = "0";
   reactRoot.style.right = "0";
   reactRoot.style.zIndex = "100";
-  reactRoot.style.background = "rgba(0,0,0,0.5)";
+  reactRoot.style.background = "#1b1a19";
 
   document.body.append(reactRoot);
 

@@ -1,11 +1,14 @@
 import React from "react";
-import { killReact } from "../../content/inject";
 
 import classes from "./CloseButton.module.css";
 
-export const CloseButton = () => {
+interface CloseButtonProps {
+  onClose: () => void;
+}
+
+export const CloseButton: React.FC<CloseButtonProps> = ({ onClose }) => {
   return (
-    <button className={classes.close} type="button" onClick={killReact}>
+    <button className={classes.close} type="button" onClick={onClose}>
       <span className={classes.icon}></span>
     </button>
   );

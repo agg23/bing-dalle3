@@ -63,5 +63,5 @@ const run = async () => {
   console.log(`Completed storing image batch. ${newGenerations} new`);
 };
 
-// run();
+run();
 injectInPage();

@@ -1,32 +1,41 @@
 import React, { useMemo } from "react";
-import { PromptDBEntry } from "../../content/db";
+import { ImageDBEntry, PromptDBEntry } from "../../content/db";
 import { useGenerationImages } from "../hooks/useGenerationImages";
 import { formatDatetimeNice } from "../../util/string";
 
 import classes from "./Generation.module.css";
+import { PromptImageWithUrl } from "../types";
 
 interface GenerationProps {
   prompt: PromptDBEntry;
+
+  setOpenImage: (image: PromptImageWithUrl | undefined) => void;
 }
 
-export const Generation: React.FC<GenerationProps> = ({ prompt }) => {
+interface ImageWithUrl {
+  image: ImageDBEntry;
+  url: string;
+}
+
+export const Generation: React.FC<GenerationProps> = ({
+  prompt,
+  setOpenImage,
+}) => {
   const { images } = useGenerationImages(prompt.id);
 
-  const imageUrls = useMemo(
-    () => images?.map((entry) => URL.createObjectURL(entry.image)) ?? [],
+  const imagesWithUrls = useMemo(
+    () =>
+      images?.map((entry) => ({
+        url: URL.createObjectURL(entry.image),
+        image: entry,
+      })) ?? [],
     [images]
   );
 
-  const imgElements = imageUrls.map((url) => (
-    <div className={classes.imageWrapper}>
-      <img key={url} className={classes.image} src={url} />
-    </div>
-  ));
-
-  const row0: React.ReactNode[] = [];
-  const row1: React.ReactNode[] = [];
-  for (let i = 0; i < imgElements.length; i++) {
-    const element = imgElements[i];
+  const row0: ImageWithUrl[] = [];
+  const row1: ImageWithUrl[] = [];
+  for (let i = 0; i < imagesWithUrls.length; i++) {
+    const element = imagesWithUrls[i];
 
     if (i > 1) {
       row1.push(element);
@@ -36,28 +45,28 @@ export const Generation: React.FC<GenerationProps> = ({ prompt }) => {
   }
 
   const imageGrid =
-    imgElements.length === 2
+    imagesWithUrls.length === 2
       ? `${classes.imageGrid} ${classes.twoItemImageGrid}`
       : classes.imageGrid;
+
+  const renderImageItem = (img: ImageWithUrl, i: number) => (
+    <div
+      key={i}
+      className={classes.rowItem}
+      onClick={() => setOpenImage({ ...img, prompt })}
+    >
+      <div className={classes.imageWrapper}>
+        <img key={img.url} className={classes.image} src={img.url} />
+      </div>
+    </div>
+  );
 
   return (
     <div className={classes.wrapper}>
       <div className={imageGrid}>
-        <div className={classes.row}>
-          {row0.map((img, i) => (
-            <div key={i} className={classes.rowItem}>
-              {img}
-            </div>
-          ))}
-        </div>
+        <div className={classes.row}>{row0.map(renderImageItem)}</div>
         {row1.length > 0 && (
-          <div className={classes.row}>
-            {row1.map((img, i) => (
-              <div key={i} className={classes.rowItem}>
-                {img}
-              </div>
-            ))}
-          </div>
+          <div className={classes.row}>{row1.map(renderImageItem)}</div>
         )}
       </div>
       <div className={classes.controls}>

@@ -2,6 +2,11 @@
   position: relative;
 
   height: 100%;
+
+  color: #fff;
+  font-family: 'Roboto',Helvetica,sans-serif;
+
+  --header-height: 90px;
 }
 
 .mainScroll {
@@ -10,4 +15,10 @@
   /* This is technically wrong, but every use except the first one will have images that cause it to scroll, */
   /* so this just fixes the right side bouncing issue in advance */
   overflow-y: scroll;
+
+  scrollbar-gutter: stable;
+}
+
+.disabled {
+  overflow: hidden;
 }
