@@ -9,6 +9,8 @@ export const usePromptList = () => {
     (async () => {
       const prompts = await db.prompt.toArray();
 
+      prompts.sort((a, b) => b.recordTimestamp - a.recordTimestamp);
+
       setIsLoading(false);
       setPrompts(prompts);
     })();
