@@ -1,0 +1,34 @@
+.header {
+  position: sticky;
+  display: grid;
+  grid-template-areas: "a b";
+  align-content: space-between;
+
+  top: 0;
+
+  width: 100%;
+  height: 76px;
+
+  background-color: #1b1a19;
+  z-index: 1;
+}
+
+.existingHeaderWrapper {
+  display: inline-flex;
+  align-items: center;
+
+  height: 76px;
+
+  padding-top: 16px;
+}
+
+.existingHeaderWrapper div {
+  display: inline-flex;
+  align-items: center;
+}
+
+.header button {
+  margin: 8px 32px 8px 0;
+
+  justify-self: end;
+}

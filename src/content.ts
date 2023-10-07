@@ -1,8 +1,9 @@
 import { fetchBlobWithRetry } from "./content/api";
 import { db } from "./content/db";
+import { injectInPage } from "./content/inject";
 import { grabRecentGenerations } from "./content/page";
 
-import "./index";
+import "./react/index";
 
 const run = async () => {
   console.log("Starting Bing DALL-E 3 Exporter");
@@ -62,4 +63,5 @@ const run = async () => {
   console.log(`Completed storing image batch. ${newGenerations} new`);
 };
 
-run();
+// run();
+injectInPage();

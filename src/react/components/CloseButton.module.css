@@ -1,0 +1,53 @@
+/* Taken from https://codepen.io/cyril-lamotte/pen/bGVxjOr */
+.close {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: #de1b89;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  --close-size: 30px;
+  --close-thickness: 4px;
+}
+
+.close .icon {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  position: relative;
+  width: var(--close-size);
+  height: var(--close-size);
+}
+
+.icon:before,
+.icon:after {
+  content: '';
+  position: absolute;
+  top: calc((var(--close-size) - var(--close-thickness)) / 2);
+  left: 0;
+  right: 0;
+  height: var(--close-thickness);
+  background: #fff;
+  border-radius: var(--close-thickness);
+}
+
+.icon:before {
+  transform: rotate(45deg);
+}
+
+.icon:after {
+  transform: rotate(-45deg);
+}
+
+
+span.icon {
+  display: block;
+}
