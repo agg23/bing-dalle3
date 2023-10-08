@@ -75,6 +75,10 @@
   line-height: 28px;
 }
 
+.date {
+  margin-top: 4px;
+}
+
 .buttons {
   display: grid;
   grid-template-columns: auto auto 1fr;

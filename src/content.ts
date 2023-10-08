@@ -5,16 +5,15 @@ import { grabRecentGenerations } from "./content/page";
 
 import "./react/index";
 
-const run = async () => {
-  console.log("Starting Bing DALL-E 3 Exporter");
-
+const checkForGenerations = async (): Promise<void> => {
+  console.log("Checking for generations");
   const generations = grabRecentGenerations();
 
   const recordTimestamp = Date.now();
 
   let newGenerations = 0;
   for (const { id, prompt, imageUrls } of generations) {
-    // Check if this image group is already stored
+    // We don't want to get throttled by Bing, so requesting one at a time is fine
     try {
       const entryExists = (await db.image.where("id").equals(id).count()) !== 0;
 
@@ -61,6 +60,22 @@ const run = async () => {
   }
 
   console.log(`Completed storing image batch. ${newGenerations} new`);
+};
+
+const run = async () => {
+  console.log("Starting Bing DALL-E 3 Exporter");
+
+  const observer = new window.MutationObserver(() => {
+    // We're lazy, and just check for any new generation when a mutation happens
+    checkForGenerations();
+  });
+
+  const wrapper = document.getElementById("girrcc");
+  if (!!wrapper) {
+    observer.observe(wrapper, { childList: true, subtree: true });
+  }
+
+  checkForGenerations();
 };
 
 run();

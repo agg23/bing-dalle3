@@ -73,7 +73,9 @@ export const Generation: React.FC<GenerationProps> = ({
       </div>
       <div className={classes.controls}>
         <div className={classes.prompt}>{prompt.prompt}</div>
-        <div>{formatDatetimeNice(new Date(prompt.recordTimestamp))}</div>
+        <div className={classes.date}>
+          {formatDatetimeNice(new Date(prompt.recordTimestamp))}
+        </div>
         <div className={classes.buttons}>
           <ControlButton
             type="download"

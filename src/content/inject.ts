@@ -15,7 +15,6 @@ const clearOldElements = () => {
   const injectedElements = document.querySelectorAll(`.${INJECTED_BASE_CLASS}`);
 
   for (const element of injectedElements) {
-    console.log("Removing", element);
     element.remove();
   }
 };
