@@ -1,7 +1,7 @@
 {
   "name": "Bing DALL-E 3 Exporter",
   "version": "0.1.0",
-  "description": "Automatic export of generated DALL-E 3 images",
+  "description": "Automatic storage of generated DALL-E 3 images",
   "homepage_url": "https://github.com/agg23/bing-dalle3",
   "manifest_version": 3,
   "minimum_chrome_version": "100",
