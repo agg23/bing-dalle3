@@ -64,7 +64,8 @@ export const Generation: React.FC<GenerationProps> = ({
   );
 
   return (
-    <div className={classes.wrapper}>
+    <div className={classes.generation}>
+      <div></div>
       <div className={imageGrid}>
         <div className={classes.row}>{row0.map(renderImageItem)}</div>
         {row1.length > 0 && (
@@ -91,6 +92,7 @@ export const Generation: React.FC<GenerationProps> = ({
           />
         </div>
       </div>
+      <div></div>
     </div>
   );
 };
