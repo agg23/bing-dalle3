@@ -1,10 +1,14 @@
 .app {
-  position: relative;
+  position: fixed;
 
-  height: 100%;
+  inset: 0;
+
+  background-color: #1b1a19;
 
   color: #fff;
   font-family: 'Roboto',Helvetica,sans-serif;
+
+  z-index: 100;
 
   --header-height: 90px;
 }

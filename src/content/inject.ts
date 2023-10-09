@@ -1,16 +1,17 @@
+import { reactStartup } from "../react/externalControl";
 import { startReact } from "../react/index";
 
 const STYLE_TITLE = "bing-dalle3-styles";
 const INJECTED_BASE_CLASS = "bing-dalle3-injected";
 const REACT_ROOT_ID = "bing-dalle3-react-root";
 
-const killElements = () => {
+const restoreBody = () => {
   // Restore root's overflow
   document.documentElement.style.overflow = "";
 };
 
 const clearOldElements = () => {
-  killElements();
+  restoreBody();
 
   const injectedElements = document.querySelectorAll(`.${INJECTED_BASE_CLASS}`);
 
@@ -51,28 +52,21 @@ const injectStylesheet = () => {
 };
 
 const openSeeAll = () => {
-  // if (!reactRoot) {
-  //   console.error("No registered React instance...");
-  //   return;
-  // }
   // Disable root overflow
   document.documentElement.style.overflow = "hidden";
 
-  const reactRoot = document.createElement("div");
-  reactRoot.id = REACT_ROOT_ID;
-  reactRoot.className = INJECTED_BASE_CLASS;
+  if (document.getElementById(REACT_ROOT_ID)) {
+    // React is already running, just start rendering again
+    reactStartup();
+  } else {
+    const reactRoot = document.createElement("div");
+    reactRoot.id = REACT_ROOT_ID;
+    reactRoot.className = INJECTED_BASE_CLASS;
 
-  reactRoot.style.position = "fixed";
-  reactRoot.style.top = "0";
-  reactRoot.style.bottom = "0";
-  reactRoot.style.left = "0";
-  reactRoot.style.right = "0";
-  reactRoot.style.zIndex = "100";
-  reactRoot.style.background = "#1b1a19";
+    document.body.append(reactRoot);
 
-  document.body.append(reactRoot);
-
-  startReact(reactRoot);
+    startReact(reactRoot);
+  }
 };
 
 export const injectInPage = () => {
@@ -101,8 +95,4 @@ export const injectInPage = () => {
   header.insertAdjacentElement("afterend", seeAllButton);
 };
 
-export const killReact = () => {
-  document.getElementById(REACT_ROOT_ID)?.remove();
-
-  killElements();
-};
+export const hideReact = restoreBody;
